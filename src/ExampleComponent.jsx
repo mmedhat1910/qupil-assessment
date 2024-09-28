@@ -15,6 +15,7 @@ const ExampleComponent = () => {
       <AudioRecorder
         onRecordingComplete={(blob) => addAudioElement(blob)}
         recorderControls={recorderControls}
+
       />
       <button onClick={recorderControls.stopRecording}>Stop recording</button>
     </div>

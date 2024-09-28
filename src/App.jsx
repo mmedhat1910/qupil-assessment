@@ -1,8 +1,9 @@
-import { Fragment } from 'react';
-import { MicrophoneIcon, SpeakerWaveIcon, PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import ExampleComponent from './ExampleComponent';
+import Question from './Question';
+
 
 const App = () => {
+  
   const questions = [
     {
       title: 'سورة البقرة',
@@ -62,40 +63,10 @@ const App = () => {
           إختبار القرآن الكريم
         </h1>
         {questions.map((q, index) => (
-          <Fragment key={index}>
-            <div className='space-y-3'>
-              {q.title}
-              <p>
-                {index} - {q.question}
-              </p>
-              <ul className='list-inside list-["-"]'>
-                {q.options.map((option, index) => (
-                  <li key={index} className='cursor-pointer'>
-                    {option.text}
-                  </li>
-                ))}
-              </ul>
-              <div className='flex gap-4'>
-                <button className='flex gap-1 items-center bg-blue-600 py-1 px-4 rounded-md text-white'>
-                  {' '}
-                  <MicrophoneIcon width={15} />
-                  تسجيل الإجابة{' '}
-                </button>
-                <button className='flex gap-2 items-center bg-gray-500 py-1 px-4 rounded-md text-white'>
-                  <SpeakerWaveIcon width={15} className='-scale-x-100' />
-                  الإستماع للتسجيل
-                </button>
-                <button className='flex gap-2 items-center bg-green-600 py-1 px-4 rounded-md text-white '>
-                  إرسال الإجابة
-                  <PaperAirplaneIcon width={15} className='-scale-x-100' />
-                </button>
-              </div>
-            </div>
-            <hr />
-          </Fragment>
+          <Question key={index} index={index} q={q} />
         ))}
       </div>
-      <ExampleComponent/>
+      <ExampleComponent />
     </div>
   );
 };
