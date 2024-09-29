@@ -5,7 +5,7 @@ import {
   StopIcon,
 } from '@heroicons/react/24/solid';
 import { useAudioRecorder } from 'react-audio-voice-recorder';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import Proptype from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -20,20 +20,38 @@ const Question = ({ index, q }) => {
     recordingTime,
     mediaRecorder,
   } = useAudioRecorder();
+  const arabicNumbers = ['١', '٢', '٣', '٤', '٥'];
+
+  const [selected, setSelected] = useState(null);
+
   return (
     <Fragment key={index}>
       <div className='space-y-3'>
         {q.title}
         <p>
-          {index} - {q.question}
+          <span lang='ar'>{arabicNumbers[index]}</span>- {q.question}
         </p>
-        <ul className='list-inside list-["-"]'>
-          {q.options.map((option, index) => (
-            <li key={index} className='cursor-pointer'>
+        <ol className='flex gap-2 list-[arabic-indic] list-inside'>
+          {q.options.map((option, i) => (
+            <li
+              key={i}
+              className={clsx(
+                'cursor-pointer px-4 py-1 rounded-md hover:underline underline-offset-4',
+                selected === i
+                  ? option.isCorrect
+                    ? 'text-green-500'
+                    : 'text-red-500'
+                  : ''
+              )}
+              onClick={() => {
+                setSelected(i);
+                console.log('selected', i, option.isCorrect);
+              }}
+            >
               {option.text}
             </li>
           ))}
-        </ul>
+        </ol>
         <div className='flex gap-4'>
           <button
             className={clsx(
