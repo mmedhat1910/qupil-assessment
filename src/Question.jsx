@@ -11,7 +11,7 @@ import clsx from 'clsx';
 import moment from 'moment';
 import { remove_tashkeel } from './utils';
 
-const Question = ({ index, q, onAnswer }) => {
+const Question = ({ index, q }) => {
   const {
     startRecording,
     stopRecording,
@@ -97,7 +97,6 @@ const Question = ({ index, q, onAnswer }) => {
               )}
               onClick={() => {
                 setSelected(i);
-                onAnswer(i);
               }}
             >
               {option.text}
